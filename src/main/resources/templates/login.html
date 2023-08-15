@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatix - log in</title>
+
+    <link th:href="@{/css/main.css}" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="main-container">
+
+    <div class="greeting">
+        <i>Welcome to Chatix!</i>
+    </div>
+
+    <div class="user-form-container">
+
+        <div class="form-item">
+            <div class="form-header">
+                Log in to start chatting!
+            </div>
+        </div>
+
+        <div th:if="${param.error}" class="form-item">
+            <div style="color: red; font-size: 14px;">
+                Invalid username or password
+            </div>
+        </div>
+
+        <div th:if="${param.logout}" class="form-item">
+            <div style="color: green">
+                You have been logged out
+            </div>
+        </div>
+
+        <form action="#" th:action="@{/login}" method="POST">
+            <div class="form-item">
+                <input type="text" id="username" name="username" placeholder="Username">
+            </div>
+
+            <div class="form-item">
+                <input type="password" id="password" name="password" placeholder="Password">
+            </div>
+
+            <div class="form-item">
+                <button type="submit" class="button-submit">Log in</button>
+            </div>
+        </form>
+
+        <div class="form-item">
+            <div id="account-question">
+                Don't have account yet?
+            </div>
+
+            <a th:href="@{/sign-up}">
+                <button type="button"
+                        id="redirect-sign-up">Sign Up</button>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
