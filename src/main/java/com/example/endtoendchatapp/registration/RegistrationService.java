@@ -9,7 +9,7 @@ import com.example.endtoendchatapp.registration.email.EmailSenderService;
 import com.example.endtoendchatapp.registration.token.ConfirmationToken;
 import com.example.endtoendchatapp.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -28,7 +28,7 @@ public class RegistrationService {
     private final AppUserService appUserService;
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailSenderService emailSenderService;
-    private final BCryptPasswordEncoder encoder;
+    private final PasswordEncoder encoder;
 
     public void register(AppUserDTO appUserDTO) {
         AppUser appUser = new AppUser();
