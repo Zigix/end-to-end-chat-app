@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +9,10 @@
 
     <link th:href="@{/css/main.css}" type="text/css" rel="stylesheet">
     <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/js/key-pair-generator.js}"></script>
 
 </head>
-<body onload="connect()">
+<body>
 
 <div class="main-container">
 
@@ -70,6 +71,11 @@
                        id="confirm-password" th:field="*{matchingPassword}"
                        th:class="${#fields.hasGlobalErrors() ? 'error-on-input' : ''}">
             </div>
+
+            <input th:type="hidden" id="public-key" th:field="*{publicKey}">
+            <input th:type="hidden" id="salt" th:field="*{salt}">
+            <input th:type="hidden" id="iv" th:field="*{iv}">
+            <input th:type="hidden" id="encrypted-private-key" th:field="*{encryptedPrivateKey}">
 
             <div class="form-item">
                 <button type="submit" class="button-submit">Sign up</button>

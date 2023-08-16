@@ -27,6 +27,14 @@ public class AppUserDTO {
 
     private String matchingPassword;
 
+    private String publicKey;
+
+    private String salt;
+
+    private String iv;
+
+    private String encryptedPrivateKey;
+
     public void setUsername(String username) {
         this.username = username.trim();
     }
@@ -41,5 +49,21 @@ public class AppUserDTO {
 
     public void setMatchingPassword(String matchingPassword) {
         this.matchingPassword = matchingPassword;
+    }
+
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public void setIv(String iv) {
+        this.iv = iv;
+    }
+
+    public void setEncryptedPrivateKey(String encryptedPrivateKey) {
+        this.encryptedPrivateKey = encryptedPrivateKey;
     }
 }
