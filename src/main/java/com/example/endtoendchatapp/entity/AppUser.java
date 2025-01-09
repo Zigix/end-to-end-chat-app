@@ -24,11 +24,21 @@ public class AppUser implements UserDetails {
     private String username;
     private String email;
     private String password;
+    private boolean enabled = true;
+    private boolean locked = false;
+    private boolean emailConfirmed = false;
 
-    private Boolean enabled = true;
-    private Boolean locked = false;
-    private Boolean emailConfirmed = false;
+    @Lob
+    @Column(name = "public_key", columnDefinition = "LONGTEXT")
+    private String publicKey;
 
+    private String salt;
+
+    private String iv;
+
+    @Lob
+    @Column(name = "encrypted_private_key", columnDefinition = "LONGTEXT")
+    private String encryptedPrivateKey;
 
     public AppUser(String username, String email, String password) {
         this.username = username;

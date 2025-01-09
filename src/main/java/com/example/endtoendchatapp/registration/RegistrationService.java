@@ -36,6 +36,10 @@ public class RegistrationService {
         appUser.setUsername(appUserDTO.getUsername());
         appUser.setEmail(appUserDTO.getEmail());
         appUser.setPassword(encoder.encode(appUserDTO.getPassword()));
+        appUser.setPublicKey(appUserDTO.getPublicKey());
+        appUser.setSalt(appUserDTO.getSalt());
+        appUser.setIv(appUserDTO.getIv());
+        appUser.setEncryptedPrivateKey(appUserDTO.getEncryptedPrivateKey());
 
         // save user to database
         appUserService.saveAppUser(appUser);

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,6 @@
     <link th:href="@{/css/main.css}" type="text/css" rel="stylesheet">
     <script th:src="@{/js/main.js}"></script>
     <script th:src="@{/js/key-pair-generator.js}"></script>
-
 </head>
 <body>
 
@@ -35,7 +34,7 @@
         </div>
 
 
-        <form th:object="${user}" action="#" th:action="@{/sign-up}" method="POST">
+        <form th:object="${user}" action="#" th:action="@{/sign-up}" method="POST" id="register-form">
             <div class="form-item">
                 <span class="validationError"
                       th:if="${#fields.hasErrors('username')}"
@@ -78,7 +77,7 @@
             <input th:type="hidden" id="encrypted-private-key" th:field="*{encryptedPrivateKey}">
 
             <div class="form-item">
-                <button type="submit" class="button-submit">Sign up</button>
+                <button class="button-submit" id="sign-up-button">Sign up</button>
             </div>
         </form>
 
@@ -95,6 +94,31 @@
 
     </div>
 </div>
+
+<script>
+    document.getElementById('sign-up-button').addEventListener('click', async (event) => {
+        event.preventDefault();
+        const formObject = document.getElementById('register-form');
+
+        const keyPair = await generateKeys();
+        const exportedPublicKey = await exportPublicKeyToBase64(keyPair.publicKey);
+
+        const password = document.getElementById('password').value;
+        const encryptedPrivateKeyData = await encryptPrivateKey(keyPair.privateKey, password);
+
+        const publicKeyInput = document.getElementById('public-key');
+        const saltInput = document.getElementById('salt');
+        const ivInput = document.getElementById('iv');
+        const encryptedPrivateKeyInput = document.getElementById('encrypted-private-key');
+
+        publicKeyInput.value = exportedPublicKey;
+        saltInput.value = encryptedPrivateKeyData.salt;
+        ivInput.value = encryptedPrivateKeyData.iv;
+        encryptedPrivateKeyInput.value = encryptedPrivateKeyData.encryptedKey;
+
+        formObject.submit();
+    })
+</script>
 
 </body>
 </html>
